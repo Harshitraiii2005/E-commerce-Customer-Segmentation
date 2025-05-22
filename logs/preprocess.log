@@ -8,3 +8,13 @@
 2025-05-21 00:54:15,808:INFO:Scaled RFM merged with original data.
 2025-05-21 00:54:15,825:INFO:Dropped InvoiceDate, InvoiceNo, and TotalPrice from original data.
 2025-05-21 00:54:17,078:INFO:Processed data saved to data/processed_data.csv
+2025-05-22 20:29:12,895:INFO:Preprocessing started.
+2025-05-22 20:29:13,647:INFO:Raw data loaded with shape (541909, 8)
+2025-05-22 20:29:13,680:INFO:Dropped unnecessary columns except CustomerID.
+2025-05-22 20:29:13,881:INFO:Duplicates dropped, new shape: (297249, 4)
+2025-05-22 20:29:14,048:INFO:Converted InvoiceDate to datetime and set reference date.
+2025-05-22 20:29:14,615:INFO:RFM table created.
+2025-05-22 20:29:14,615:INFO:RFM table scaled.
+2025-05-22 20:29:14,650:INFO:Scaled RFM merged with original data.
+2025-05-22 20:29:14,665:INFO:Dropped InvoiceDate, InvoiceNo, and TotalPrice from original data.
+2025-05-22 20:29:16,519:INFO:Processed data saved to data/processed_data.csv

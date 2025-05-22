@@ -1,7 +1,8 @@
 import pandas as pd
 import logging
 import os
-import joblib  # corrected import
+import joblib
+import numpy as np
 from sklearn.cluster import KMeans, DBSCAN
 from scipy.cluster.hierarchy import linkage, fcluster
 from sklearn.metrics import silhouette_score
@@ -28,31 +29,54 @@ try:
     kmeans_silhouette = silhouette_score(X, kmeans_labels)
     logging.info(f"KMeans clustering completed with silhouette score: {kmeans_silhouette:.4f}")
 
-    # PCA for dimensionality reduction before DBSCAN
-    pca = PCA(n_components=5, random_state=42)
+    # PCA for dimensionality reduction before DBSCAN and Hierarchical
+    pca = PCA(n_components=2, random_state=42)
     X_reduced = pca.fit_transform(X)
 
-    # DBSCAN on reduced data
-    dbscan = DBSCAN(eps=0.3, min_samples=5)
-    dbscan_labels = dbscan.fit_predict(X_reduced)
-    df['DBSCAN_Cluster'] = dbscan_labels
-
-    # Silhouette score on reduced data excluding noise
-    mask = dbscan_labels != -1
-    if mask.sum() > 0:
-        dbscan_silhouette = silhouette_score(X_reduced[mask], dbscan_labels[mask])
-        logging.info(f"DBSCAN clustering completed with silhouette score (excluding noise): {dbscan_silhouette:.4f}")
+    # DBSCAN on a random sample of reduced data
+    dbscan_sample_size = 5000
+    if len(X_reduced) > dbscan_sample_size:
+        dbscan_indices = np.random.choice(len(X_reduced), dbscan_sample_size, replace=False)
+        X_dbscan_sample = X_reduced[dbscan_indices]
     else:
-        logging.info("DBSCAN found no clusters (all points marked as noise)")
+        dbscan_indices = np.arange(len(X_reduced))
+        X_dbscan_sample = X_reduced
 
-    # Hierarchical Clustering
-    Z = linkage(X, method='ward')
-    hier_labels = fcluster(Z, t=5, criterion='maxclust')
-    df['Hierarchical_Cluster'] = hier_labels
-    hier_silhouette = silhouette_score(X, hier_labels)
-    logging.info(f"Hierarchical clustering completed with silhouette score: {hier_silhouette:.4f}")
+    dbscan = DBSCAN(eps=0.3, min_samples=5)
+    dbscan_labels_sample = dbscan.fit_predict(X_dbscan_sample)
 
-    # Save clustered data with CustomerID back
+    dbscan_labels_full = -1 * np.ones(len(X_reduced), dtype=int)
+    dbscan_labels_full[dbscan_indices] = dbscan_labels_sample
+    df['DBSCAN_Cluster'] = dbscan_labels_full
+
+    mask = dbscan_labels_sample != -1
+    if mask.sum() > 0:
+        dbscan_silhouette = silhouette_score(X_dbscan_sample[mask], dbscan_labels_sample[mask])
+        logging.info(f"DBSCAN clustering (sampled) silhouette score (excluding noise): {dbscan_silhouette:.4f}")
+    else:
+        logging.info("DBSCAN found no clusters (all points marked as noise) in sampled subset")
+
+    # Hierarchical Clustering on a smaller sample
+    hier_sample_size = 1000
+    if len(X_reduced) > hier_sample_size:
+        hier_indices = np.random.choice(len(X_reduced), hier_sample_size, replace=False)
+        X_hier_sample = X_reduced[hier_indices]
+    else:
+        hier_indices = np.arange(len(X_reduced))
+        X_hier_sample = X_reduced
+
+    Z = linkage(X_hier_sample, method='ward')
+    hier_labels_sample = fcluster(Z, t=5, criterion='maxclust')
+
+    # Assign hierarchical labels to full data (optional - only sample labeled)
+    hier_labels_full = -1 * np.ones(len(X_reduced), dtype=int)
+    hier_labels_full[hier_indices] = hier_labels_sample
+    df['Hierarchical_Cluster'] = hier_labels_full
+
+    hier_silhouette = silhouette_score(X_hier_sample, hier_labels_sample)
+    logging.info(f"Hierarchical clustering (sampled) silhouette score: {hier_silhouette:.4f}")
+
+    # Save clustered data
     df['CustomerID'] = customer_ids
     df.to_csv('data/clustered_data.csv', index=False)
     logging.info("Clustered data saved to 'data/clustered_data.csv'.")
@@ -60,7 +84,7 @@ try:
     # Save models
     joblib.dump(kmeans, 'models/kmeans_model.pkl')
     joblib.dump(dbscan, 'models/dbscan_model.pkl')
-    joblib.dump(Z, 'models/hierarchical_model.pkl')
+    joblib.dump(Z, 'models/hierarchical_model.pkl')  # saving linkage matrix
     logging.info("Models saved successfully.")
 
 except Exception as e:
