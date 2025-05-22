@@ -1,0 +1,8 @@
+2025-05-21 01:18:28,914:INFO:Training started.
+2025-05-21 01:18:29,117:INFO:Processed data loaded with shape (248423, 4)
+2025-05-21 01:36:38,587:INFO:KMeans clustering completed with silhouette score: 0.7913
+2025-05-21 01:38:20,934:ERROR:Error occurred: 
+2025-05-21 01:42:08,877:INFO:Training started.
+2025-05-21 01:42:09,059:INFO:Processed data loaded with shape (248423, 4)
+2025-05-21 01:55:02,986:INFO:KMeans clustering completed with silhouette score: 0.7913
+2025-05-21 01:55:02,986:ERROR:Error occurred: n_components=5 must be between 0 and min(n_samples, n_features)=3 with svd_solver='covariance_eigh'
