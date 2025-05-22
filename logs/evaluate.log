@@ -1,0 +1,46 @@
+2025-05-22 16:37:13,669:INFO:Clustered data loaded with shape (248423, 7)
+2025-05-22 16:37:13,804:INFO:Models loaded successfully.
+2025-05-22 16:54:05,520:INFO:KMeans Evaluation Metrics:
+2025-05-22 16:54:05,520:INFO:Silhouette Score: 0.7913
+2025-05-22 16:54:05,520:INFO:Calinski-Harabasz Score: 580288.1229
+2025-05-22 16:54:05,520:INFO:Davies-Bouldin Score: 0.5003
+2025-05-22 16:54:06,120:INFO:DBSCAN Evaluation Metrics:
+2025-05-22 16:54:06,136:INFO:Silhouette Score: 0.2185
+2025-05-22 16:54:06,136:INFO:Calinski-Harabasz Score: 3980.8869
+2025-05-22 16:54:06,136:INFO:Davies-Bouldin Score: 0.2281
+2025-05-22 16:54:06,205:INFO:Hierarchical Evaluation Metrics:
+2025-05-22 16:54:06,205:INFO:Silhouette Score: 0.7798
+2025-05-22 16:54:06,220:INFO:Calinski-Harabasz Score: 1980.0251
+2025-05-22 16:54:06,220:INFO:Davies-Bouldin Score: 0.5040
+2025-05-22 16:54:06,220:INFO:Evaluation metrics saved to 'metrics/evaluation_metrics.json'.
+2025-05-22 21:54:37,794:INFO:Clustered data loaded with shape (248423, 7)
+2025-05-22 21:54:37,980:INFO:Models loaded successfully.
+2025-05-22 22:08:42,231:INFO:KMeans Evaluation Metrics:
+2025-05-22 22:08:42,231:INFO:Silhouette Score: 0.7913
+2025-05-22 22:08:42,231:INFO:Calinski-Harabasz Score: 580288.1229
+2025-05-22 22:08:42,231:INFO:Davies-Bouldin Score: 0.5003
+2025-05-22 22:08:42,713:INFO:DBSCAN Evaluation Metrics:
+2025-05-22 22:08:42,713:INFO:Silhouette Score: 0.2699
+2025-05-22 22:08:42,714:INFO:Calinski-Harabasz Score: 4622.7511
+2025-05-22 22:08:42,714:INFO:Davies-Bouldin Score: 0.2215
+2025-05-22 22:08:42,780:INFO:Hierarchical Evaluation Metrics:
+2025-05-22 22:08:42,781:INFO:Silhouette Score: 0.7916
+2025-05-22 22:08:42,781:INFO:Calinski-Harabasz Score: 2583.3131
+2025-05-22 22:08:42,781:INFO:Davies-Bouldin Score: 0.4822
+2025-05-22 22:08:42,783:INFO:Evaluation metrics saved to 'metrics/evaluation_metrics.json'.
+2025-05-22 22:50:25,498:INFO:Clustered data loaded with shape (7349, 6)
+2025-05-22 22:50:25,498:ERROR:Error during evaluation: "None of [Index(['Recency', 'Frequency', 'Monetary'], dtype='object')] are in the [columns]"
+2025-05-22 23:01:26,905:INFO:Clustered data loaded with shape (7349, 6)
+2025-05-22 23:01:26,905:ERROR:Error during evaluation: "None of [Index(['Recency', 'Frequency', 'Monetary'], dtype='object')] are in the [columns]"
+2025-05-22 23:17:18,672:INFO:Loaded clustered data with shape (7349, 6)
+2025-05-22 23:17:18,673:ERROR:Error during evaluation: "None of [Index(['Recency', 'Frequency', 'Monetary'], dtype='object')] are in the [columns]"
+2025-05-22 23:20:37,208:INFO:Loaded clustered data with shape (7349, 6)
+2025-05-22 23:20:38,477:INFO:KMeans silhouette score on clustered data: 0.4149
+2025-05-22 23:20:39,113:INFO:DBSCAN silhouette score on clustered data: 0.2630
+2025-05-22 23:20:39,139:INFO:Hierarchical clustering silhouette score on clustered data: 0.5392
+2025-05-22 23:20:39,140:INFO:Evaluation completed successfully.
+2025-05-22 23:22:09,442:INFO:Loaded clustered data with shape (7349, 6)
+2025-05-22 23:22:10,770:INFO:KMeans scores: {'silhouette_score': np.float64(0.4149414913943743), 'calinski_harabasz_score': np.float64(33362.64094093747), 'davies_bouldin_score': np.float64(0.6191364196405957)}
+2025-05-22 23:22:11,397:INFO:DBSCAN scores: {'silhouette_score': np.float64(0.2629704258402025), 'calinski_harabasz_score': np.float64(4302.094641323655), 'davies_bouldin_score': np.float64(0.25460275853336267)}
+2025-05-22 23:22:11,423:INFO:Hierarchical scores: {'silhouette_score': np.float64(0.5391755268631784), 'calinski_harabasz_score': np.float64(5314.159215799795), 'davies_bouldin_score': np.float64(0.47556383972178606)}
+2025-05-22 23:22:11,424:INFO:Evaluation metrics saved to 'metrics/evaluation_metrics.json'.

@@ -1,0 +1,70 @@
+schema: '2.0'
+stages:
+  preprocess:
+    cmd: python project/preprocess.py
+    deps:
+    - path: project/preprocess.py
+      hash: md5
+      md5: 3ef80777a511a1464158f32afcecf0bb
+      size: 3023
+    outs:
+    - path: data/processed_data.csv
+      hash: md5
+      md5: 742ddf6472b83f9462fcf6229e5a729f
+      size: 339132
+  train:
+    cmd: python project/train.py
+    deps:
+    - path: data/processed_data.csv
+      hash: md5
+      md5: 742ddf6472b83f9462fcf6229e5a729f
+      size: 339132
+    - path: project/train.py
+      hash: md5
+      md5: cc1d11f2e9494d30e604cfdaddebc7e5
+      size: 3843
+    outs:
+    - path: data/clustered_data.csv
+      hash: md5
+      md5: 347ba31acdd2966952dadbc792b70a70
+      size: 387429
+    - path: models/dbscan_model.pkl
+      hash: md5
+      md5: ef5f5fcb9c396e75300b45de7e47429d
+      size: 160055
+    - path: models/hierarchical_model.pkl
+      hash: md5
+      md5: b6840491505f71dd1189a5dc2ea1b66c
+      size: 32209
+    - path: models/kmeans_model.pkl
+      hash: md5
+      md5: cabf4c4668c80ce2adb55aec646a4c22
+      size: 30475
+  evaluate:
+    cmd: python project/evaluate.py
+    deps:
+    - path: data/clustered_data.csv
+      hash: md5
+      md5: 347ba31acdd2966952dadbc792b70a70
+      size: 387429
+    - path: models/dbscan_model.pkl
+      hash: md5
+      md5: ef5f5fcb9c396e75300b45de7e47429d
+      size: 160055
+    - path: models/hierarchical_model.pkl
+      hash: md5
+      md5: b6840491505f71dd1189a5dc2ea1b66c
+      size: 32209
+    - path: models/kmeans_model.pkl
+      hash: md5
+      md5: cabf4c4668c80ce2adb55aec646a4c22
+      size: 30475
+    - path: project/evaluate.py
+      hash: md5
+      md5: a24a77eab9c13366c56474f45b1df688
+      size: 3227
+    outs:
+    - path: metrics/evaluation_metrics.json
+      hash: md5
+      md5: 7bdb1e2a60f1ed8698b6b31f226781a8
+      size: 554

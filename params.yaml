@@ -1,0 +1,16 @@
+preprocess:
+  sample_size: 20000       
+  pca_components: 3
+
+kmeans:
+  n_clusters: 6
+  random_state: 42
+
+dbscan:
+  eps: 0.5
+  min_samples: 8
+  sample_size: 5000
+
+hierarchical:
+  n_clusters: 8
+  sample_size: 1000
